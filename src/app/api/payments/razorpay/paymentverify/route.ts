@@ -1,43 +1,75 @@
 
 import crypto from "crypto";
 import { NextResponse } from "next/server";
+import { db } from "@/lib";
+import { auth } from "@clerk/nextjs/server";
 
-const generateSignature = (order_id: string, razorpay_payment_id: string) => {
-  const key_secret = process.env.RAZORPAY_SECRET_ID;
+const generateSignature = async (razorpayOrderId: string, razorpay_payment_id: string) => {
+  const key_secret = process.env.RAZORPAY_KEY_SECRET as string;
   
   if (!key_secret) {
-    throw new Error("RAZORPAY_SECRET_ID environment variable is not set.");
+    throw Error("RAZORPAY_SECRET_ID environment variable is not set.");
   }
 
-  return crypto
-    .createHmac("sha256", key_secret)  // Ensure lowercase "sha256"
-    .update(order_id + '|' + razorpay_payment_id)
-    .digest('hex');
+  const sig = crypto
+  .createHmac('sha256', key_secret)
+  .update(`${razorpayOrderId}|${razorpay_payment_id}`)
+  .digest('hex');
+  return sig;
 };
 
 export async function POST(req: Request) {
+
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ message: "User not authenticated" }, { status: 401 });
+  }
+
   try {
-    const { order_id, razorpay_payment_id, razorpay_signature } = await req.json();
+
+    const { 
+      // Fields for payment verification
+      orderCreationId, 
+      razorpay_payment_id, 
+      razorpay_signature,
+      // Additional fields for database
+      id,
+      amount,
+      currency,
+      receipt,
+      status,
+      plan,
+       
+    } = await req.json();
 
     // Generate the expected signature
-    const generatedSignature = generateSignature(order_id, razorpay_payment_id);
+    const generated_signature = await generateSignature(orderCreationId, razorpay_payment_id);
 
-    console.log("Generated Signature:", generatedSignature);
-    console.log("Received Razorpay Signature:", razorpay_signature);
+    if (generated_signature === razorpay_signature) {
 
-    if (generatedSignature !== razorpay_signature) {
-      return NextResponse.json(
-        { message: "Payment verification failed", isOk: false },
-        { status: 400 }
-      );
+      await db.userSubscription.create({
+        data: {
+          id: id,
+          userId: userId,
+          status: status,
+          amount: amount,
+          currency: currency,
+          receipt: receipt,
+          plan: plan,
+          createdAt: new Date(),
+        },
+      });
+
+      return NextResponse.json({message: "success"}, { status: 200 });
+      
+    } else {
+      return NextResponse.json({ message: "failed"});
     }
 
     // Update order status in the database or grant access here
 
-    return NextResponse.json(
-      { message: "Payment verified successfully", isOk: true },
-      { status: 200 }
-    );
+    
 
   } catch (error) {
     console.error("Error during payment verification:", error);

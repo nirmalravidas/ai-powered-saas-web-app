@@ -46,7 +46,9 @@ export const increaseApiLimit = async () => {
   if (userApiLimit) {
     await db.userApiLimit.update({
       where: { userId },
-      data: { count: userApiLimit.count + 1 },
+      data: { 
+        count: userApiLimit.count + 1 
+      },
     });
   } else {
     await db.userApiLimit.create({

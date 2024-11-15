@@ -6,12 +6,15 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Script from "next/script"
+import toast from "react-hot-toast";
 
-const PaymentPage = () => {
+const  PaymentPage = () => {
 
   const { user } = useUser();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -44,18 +47,13 @@ const PaymentPage = () => {
     setFormData((prevData) => ({ ...prevData, selectedPlan: plan }));
   };
 
-  const handlePayment = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    if (!formData.name || !formData.email || !formData.selectedPlan || !formData.contact) {
-      setError("Please fill out all fields and select a plan.");
-      return;
-    }
-  
-    setLoading(true);
-    setError(null);
-  
+   const createOrder = async () => {
     try {
+      if (!formData.name || !formData.email || !formData.selectedPlan || !formData.contact) {
+        setError("Please fill out all fields and select a plan.");
+        return;
+      }
+  
       // Prepare request data to send to API
       const requestData = {
         plan: formData.selectedPlan,
@@ -69,47 +67,76 @@ const PaymentPage = () => {
       const response = await axios.post("/api/payments/razorpay/payment", requestData);
   
       // Check if the response contains the Razorpay order details
-      const order = response.data;
+      const orderResponse = response.data;
   
-      if (!order || !order.id) {
+      if (!orderResponse || !orderResponse.id) {
         throw new Error("Failed to create Razorpay order.");
       }
-  
+
+      return orderResponse;
+
+    } catch (error) {
+      console.error("Error creating Razorpay order:", error);
+      throw new Error("Failed to create Razorpay order.");
+    }
+  }
+      
+  const processPayment = async ( e: React.FormEvent) => {
+    e.preventDefault();
+
+    try{
+
+      setLoading(true);
+      setError(null);
+
+      const orderData = await createOrder();
+      const orderId = orderData.id;
+
       // Initialize Razorpay checkout with the returned order details
       const options = {
         key: process.env.RAZORPAY_KEY_ID, // Razorpay key
-        amount: order.amount, // The amount you received from backend (in the smallest currency unit, e.g., paise)
-        currency: order.currency,
+        amount: orderData.amount, // The amount you received from backend (in the smallest currency unit, e.g., paise)
+        currency: orderData.currency,
         name: "Rexhorizon",
         description: `Payment for ${formData.selectedPlan} plan`,
-        image: "https://rexhorizon.com/icons/logo.png",
-        callback_url: 'https://rexhorizon.com/paymentsuccess?paymentid=razorpay_payment_id',
-        cancel_url: 'https://rexhorizon.com/dashboard',
-        order_id: order.id,
+        image: "/icons/logo.png",
+        // callback_url: '/paymentsuccess',
+        cancel_url: '/dashboard',
+        order_id: orderId,
+        razorpay_payment_id: orderData.razorpay_payment_id,
+        razorpay_signature: orderData.razorpay_signature,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         handler: async function (response: any) {
-          try {
+          const requestVerifyData = {
+            response,
+            orderCreationId: orderId,
+            currency: orderData.currency,
+            amount: orderData.amount,
+            receipt: orderData.receipt,
+            status: orderData.status,
+            plan: orderData.plan,
+            createdAt: orderData.created_at,
+            id: orderData.id,
+          };
 
-            const requestData = {
-              order_id: response.order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            };
+          const verifyResponse = await axios.post("/api/payments/razorpay/paymentverify", requestVerifyData);
+          const verifyData = verifyResponse.data;
 
-            const verifyResponse = await axios.post("/api/payments/razorpay/paymentverify", requestData);
+          if (verifyData.message === "success") {
 
-            const res = verifyResponse.data;
+            router.push(`/paymentsuccess?paymentid=${orderData.id}&plan=${orderData.plan}`);
+            // Save the order details in the database
 
-            if (res.isOk) {
-              alert("Payment successful");
-
-            } else {
-              alert("Payment verification failed");
-            }
-          } catch (err) {
-            console.error("Payment verification error:", err);
-            alert("An error occurred during payment verification.");
+          } else if (verifyData.message === "failed") {
+            toast.error("Payment failed");
+            // Handle the error
+          } else {
+            console.log("Unknown error occurred");
+            toast.error("Unknown error occurred");
+            // Handle the error
           }
+
+          // Save the order details in the database
         },
         prefill: {
           name: formData.name,
@@ -121,14 +148,13 @@ const PaymentPage = () => {
         },
       };
   
-      const razorpay = new (window).Razorpay(options);
+      const razorpay = new window.Razorpay(options);
       razorpay.open(); // Open the Razorpay checkout modal
-  
+
+      setLoading(false);
     } catch (error) {
       console.error("Payment Error:", error);
       setError("An error occurred while processing the payment.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -145,7 +171,7 @@ const PaymentPage = () => {
                     Continue to Checkout
                 </h2>
 
-                <form onSubmit={handlePayment} className="w-full">
+                <form onSubmit={processPayment} className="w-full">
                     <div className="space-y-2 w-full">
                         <Label htmlFor="email">
                             Full Name
@@ -187,13 +213,13 @@ const PaymentPage = () => {
                             Contact Number
                         </Label>
                         <Input
-                            type="nunmber"
+                            type="tel"
                             id="contact"
                             name="contact"
                             value={formData.contact}
                             onChange={handleInputChange}
                             required
-                            placeholder="+91 0000000000"
+                            placeholder="+91 1234567890"
                             autoComplete="off"
                             className="w-full focus-visible:border-foreground"
                           />

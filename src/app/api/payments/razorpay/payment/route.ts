@@ -1,7 +1,6 @@
 import { NextResponse} from "next/server";
 import Razorpay from "razorpay";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "@/lib";
 import { PRO_PLAN_PRICE, PREMIER_PLAN_PRICE } from "@/utils";
 
 const razorpayInstance = new Razorpay({
@@ -41,27 +40,8 @@ export async function POST(req: Request) {
       receipt: `receipt_order_${Math.random().toString(36).substring(7)}`, // Generate a unique receipt ID
     });
 
-    // Save the order details in the database
-    await db.userSubscription.create({
-      data: {
-        id: order.id,
-        userId: userId,
-        plan: plan,
-        amount: amount,
-        currency: order.currency,
-        receipt: "re" + order.receipt,
-        createdAt: new Date(),
-        status: order.status,
-      },
-    });
-
-    // await db.userSubscription.deleteMany({
-    //   where: {
-    //     userId: userId,
-    //     status: "pending",
-    //   },
-    // });
-
+    
+    
     // Respond with the created order details
     return NextResponse.json(order);
 

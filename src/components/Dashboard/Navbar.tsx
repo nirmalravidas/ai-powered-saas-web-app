@@ -24,7 +24,6 @@ const Navbar = async () => {
       </div>
       <div className="flex lg:w-full md:w-auto justify-end">
         <UserButton
-          
           afterSwitchSessionUrl="/" />
       </div>
     </div>
