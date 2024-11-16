@@ -1,9 +1,8 @@
-import { Metadata } from 'next';
-import { APP_DOMAIN, APP_NAME } from '../';
+import { Metadata } from "next";
 
 export const generateMetadata = ({
-  title = `${APP_NAME} - Create Stunning Images Instantly`,
-  description = `${APP_DOMAIN} is an AI-powered image generator that helps you create stunning visuals from simple prompts. Whether you are a content creator, designer, or marketer, generate unique images effortlessly.`,
+  title = `${process.env.NEXT_PUBLIC_APP_NAME} - Create Stunning Images Instantly with AI`,
+  description = `${process.env.NEXT_PUBLIC_APP_NAME} is an AI-powered image generator that helps you create stunning visuals from simple prompts. Whether you are a content creator, designer, or marketer, generate unique images effortlessly.`,
   image = "/thumbnail.png",
   keywords = "AI image generator, create images, AI image creation, image generation, design, art, visuals, content creation, marketing tools",  // Add keywords here
   icons = [
@@ -24,6 +23,8 @@ export const generateMetadata = ({
     },
   ],
   noIndex = false,
+  // Optional: Add additional metadata 
+  
 }: {
   title?: string;
   description?: string;
@@ -34,18 +35,19 @@ export const generateMetadata = ({
 } = {}): Metadata => ({
   title,
   description,
-  keywords,  // Include keywords in the metadata
+  keywords,  
   icons,
   openGraph: {
     title,
     description,
-    url: `${APP_DOMAIN}`,  // Add URL for Open Graph
+    url: process.env.NEXT_PUBLIC_APP_DOMAIN,
     ...(image && { images: [{ url: image }] }),
+    siteName: process.env.NEXT_PUBLIC_APP_NAME,
   },
   twitter: {
     title,
     description,
-    ...(image && { card: `${APP_NAME}`, images: [image] }),
+    ...(image && { card: "summary_large_image", images: [image] }),
     creator: "@nirmalravidas_",
   },
   // Optional: Disallow search engine indexing on specific pages
