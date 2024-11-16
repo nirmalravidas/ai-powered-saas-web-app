@@ -1,6 +1,5 @@
 'use client';
 
-import { Zap } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
@@ -10,17 +9,16 @@ interface SubscriptionButtonProps {
 }
 
 export const SubscriptionButton = ({
-  isActive,
+  plan,
 }: SubscriptionButtonProps) => {
 
   return (
          <Link href="/payment">
             <Button
               size="lg"
-              variant="premium"
+              variant="default"
             >
-              {!isActive ? 'Upgrade' : 'Manage Subscription'}
-                 {!isActive && <Zap className="w-4 h-4 ml-2 fill-white" />}
+              {plan === 'free' ? 'Upgrade' : 'Manage Subscription'}
             </Button>
           </Link>
 

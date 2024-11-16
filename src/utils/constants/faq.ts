@@ -12,12 +12,12 @@ export const FAQ = [
     {
         id: "item-3",
         question: "How do credits work?",
-        answer: "Every image generated costs 1 credit. The number of images you can generate each month depends on your subscription plan.",
+        answer: "Every image generated costs 1 credit. The number of images you can generate depends on your subscription plan.",
     },
     {
         id: "item-4",
         question: "What are the available subscription plans?",
-        answer: "We offer three monthly plans: Free Plan - Generate up to 4 images per month at no cost. Pro Plan - Generate up to 60 images for $49. Premier Plan - Generate up to 200 images for $299.",
+        answer: "We offer credits based plans: Free Plan - Generate up to 4 images at no cost. Pro Plan - Generate up to 60 images for $49. Premier Plan - Generate up to 200 images for $299.",
     },
     {
         id: "item-5",
@@ -32,12 +32,17 @@ export const FAQ = [
     {
         id: "item-7",
         question: "Can I change my subscription plan?",
-        answer: "Absolutely. You can switch between plans at any time from your account settings, and the change will take effect in your next billing cycle.",
+        answer: "Absolutely. You can switch between plans at any time.",
     },
     {
         id: "item-8",
         question: "How do I get started?",
         answer: "Simply sign up, choose your plan, and start generating images! Our AI makes it quick and easy to bring your ideas to life.",
+    },
+    {
+        id: "item-9",
+        question: "How to delete my account?",
+        answer: "If you want to delete your account, please contact us at out contact page. You have provided your email address, name, and which plan you have. We will delete your account and all your data.",
     },
     
 ];

@@ -2,17 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import React from 'react'
-import { useClerk } from "@clerk/nextjs";
+import { useClerk, useAuth } from "@clerk/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const PaymentSuccessPage = () => {
-
+    
     const router = useRouter();
     const searchParams = useSearchParams()
-    const paymentid = searchParams.get('paymentid')
-    const plan = searchParams.get('plan')
+    const orderid = searchParams.get('orderid')
 
     const { user } = useClerk();
+    const { isSignedIn } = useAuth();
+
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -26,10 +27,10 @@ const PaymentSuccessPage = () => {
                     Your payment has been successful!
                     </h2>
                     <p className="text-gray-300 max-w-xl leading-relaxed sm:mx-auto lg:ml-0">
-                    Enjoy your {plan} plan! (Payment ID: {paymentid})
+                    Enjoy your upgraded plan! <br/> Order ID: {orderid}
                     </p>
                     <div className="pt-10 items-center justify-center space-y-3 sm:space-x-6 sm:space-y-0 sm:flex lg:justify-start">
-                        <Button onClick={() => router.push("/")} className="px-7 py-3 w-full bg-slate-900 hover:bg-slate-700 text-gray-200 text-center rounded-md block sm:w-auto">
+                        <Button onClick={() => isSignedIn ? router.push("/dashboard") : router.push("/sign-in")} className="px-7 py-3 w-full bg-slate-900 hover:bg-slate-700 text-gray-200 text-center rounded-md block sm:w-auto">
                             Back to Dashboard
                         </Button>
                     </div>

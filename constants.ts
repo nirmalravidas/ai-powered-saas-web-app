@@ -6,4 +6,4 @@ export const MAX_PREMIER_COUNTS = 200;
 
 export const PRO_PLAN_PRICE = 4999; // $49
 
-export const PREMIER_PLAN_PRICE = 25000; // $299
+export const PREMIER_PLAN_PRICE = 25999; // $299

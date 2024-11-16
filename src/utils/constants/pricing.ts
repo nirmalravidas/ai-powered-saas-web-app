@@ -7,13 +7,13 @@ export const PLANS = [
             yearly: 0,
         },
         features: [
-            { text: "Only 4 images.", tooltip: "Number of images per month" },
+            { text: "Only 4 images.", tooltip: "Number of images" },
             { text: "256x256, 512x512, 1024x1024", tooltip: "Image resolutions" },
-            { text: "$0 / month", tooltip: "Price" },
+            { text: "$0", tooltip: "Price" },
         ],
         btn: {
             text: "Start for free",
-            href: "/sign-up?plan=free",
+            href: "/sign-up",
             variant: "default",
         }
     },
@@ -25,14 +25,14 @@ export const PLANS = [
             yearly: Math.round(9 * 12 * (1 - 0.12)),
         },
         features: [
-            { text: "60 images/month", tooltip: "Number of images per month" },
+            { text: "60 images", tooltip: "Number of images" },
             { text: "256x256, 512x512, 1024x1024", tooltip: "Image resolutions" },
-            { text: "$49/month", tooltip: "Price" },
+            { text: "$49", tooltip: "Price" },
             
         ],
         btn: {
             text: "Get started",
-            href: "/sign-up?plan=pro",
+            href: "/payment",
             variant: "purple",
         }
     },
@@ -44,13 +44,13 @@ export const PLANS = [
             yearly: Math.round(49 * 12 * (1 - 0.12)),
         },
         features: [
-            { text: "200 images/month", tooltip: "Number of images per month" },
+            { text: "200 images", tooltip: "Number of images" },
             { text: "256x256, 512x512, 1024x1024", tooltip: "Image resolutions" },
-            { text: "$299 / month", tooltip: "Price" },
+            { text: "$299", tooltip: "Price" },
         ],
         btn: {
             text: "Get started",
-            href: "/sign-up?plan=premier",
+            href: "/payment",
             variant: "default",
         }
     }

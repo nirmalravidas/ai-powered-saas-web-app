@@ -69,7 +69,6 @@ export const FreeCounter = ({
               variant="premium"
             >
               {isActive ? 'Upgrade Plan' : 'Renew Subscription'}
-              Upgrade Plan
               <Zap className="w-4 h-4 ml-2 fil-white" />
             </Button>
           ) : (

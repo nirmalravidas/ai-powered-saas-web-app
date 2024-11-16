@@ -111,14 +111,18 @@ const  PaymentPage = () => {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
             orderCreationId: response.razorpay_order_id,
+            orderId: orderId,
           };
 
           const verifyResponse = await axios.post("/api/payments/razorpay/paymentverify", requestVerifyData);
           const verifyData = verifyResponse.data;
 
           if (verifyData.message === "success") {
+
             console.log("Payment successful");
-            router.push(`/paymentsuccess?paymentid=${orderData.id}&plan=${orderData.plan}`);
+
+            router.push('/paymentsuccess?orderid=' + orderData.id);
+
           } else {
             toast.error("Payment failed");
           } 
