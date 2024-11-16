@@ -1,7 +1,6 @@
 
 import crypto from "crypto";
 import { NextResponse } from "next/server";
-import { db } from "@/lib";
 import { auth } from "@clerk/nextjs/server";
 
 const generateSignature = async (razorpayOrderId: string, razorpay_payment_id: string) => {
@@ -33,41 +32,21 @@ export async function POST(req: Request) {
       orderCreationId, 
       razorpay_payment_id, 
       razorpay_signature,
-      // Additional fields for database
-      id,
-      amount,
-      currency,
-      receipt,
-      status,
-      plan,
        
     } = await req.json();
 
     // Generate the expected signature
     const generated_signature = await generateSignature(orderCreationId, razorpay_payment_id);
 
-    if (generated_signature === razorpay_signature) {
+    if (generated_signature !== razorpay_signature) {
 
-      await db.userSubscription.create({
-        data: {
-          id: id,
-          userId: userId,
-          status: status,
-          amount: amount,
-          currency: currency,
-          receipt: receipt,
-          plan: plan,
-          createdAt: new Date(),
-        },
-      });
-
-      return NextResponse.json({message: "success"}, { status: 200 });
+      return NextResponse.json({ message: "failed", isOk: false }, { status: 400 });
       
-    } else {
-      return NextResponse.json({ message: "failed"});
     }
 
     // Update order status in the database or grant access here
+
+    return NextResponse.json({ message: "success", isOk: true }, { status: 200 });
 
     
 

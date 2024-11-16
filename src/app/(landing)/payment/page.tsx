@@ -108,35 +108,20 @@ const  PaymentPage = () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         handler: async function (response: any) {
           const requestVerifyData = {
-            response,
-            orderCreationId: orderId,
-            currency: orderData.currency,
-            amount: orderData.amount,
-            receipt: orderData.receipt,
-            status: orderData.status,
-            plan: orderData.plan,
-            createdAt: orderData.created_at,
-            id: orderData.id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            orderCreationId: response.razorpay_order_id,
           };
 
           const verifyResponse = await axios.post("/api/payments/razorpay/paymentverify", requestVerifyData);
           const verifyData = verifyResponse.data;
 
           if (verifyData.message === "success") {
-
+            console.log("Payment successful");
             router.push(`/paymentsuccess?paymentid=${orderData.id}&plan=${orderData.plan}`);
-            // Save the order details in the database
-
-          } else if (verifyData.message === "failed") {
-            toast.error("Payment failed");
-            // Handle the error
           } else {
-            console.log("Unknown error occurred");
-            toast.error("Unknown error occurred");
-            // Handle the error
-          }
-
-          // Save the order details in the database
+            toast.error("Payment failed");
+          } 
         },
         prefill: {
           name: formData.name,
