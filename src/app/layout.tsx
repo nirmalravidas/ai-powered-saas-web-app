@@ -17,6 +17,31 @@ export const metadata: Metadata = {
     { rel: 'apple-touch-icon', sizes: '180x180', url: '/apple-touch-icon.png' },
     { rel: 'icon', sizes: '32x32', url: '/favicon-32x32.png' },
   ],
+  twitter: {
+    card: 'summary_large_image',
+    images: [
+      {
+        url: '/thumbnail.png',
+        width: 1200,
+        height: 630,
+        alt: `${APP_NAME}`,
+      },
+    ],
+  },
+  // openGraph: 
+  openGraph: {
+    title: `${APP_NAME} - Create Stunning Images Instantly`,
+    description: 'AI-powered image generator for creating stunning visuals from simple prompts.',
+    url: `${APP_NAME}`,
+    images: [
+      {
+        url: '/thumbnail.png',
+        width: 1200,
+        height: 630,
+        alt: `${APP_NAME}`,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children,}: { children: React.ReactNode;}) {
