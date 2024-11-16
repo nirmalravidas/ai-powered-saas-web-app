@@ -242,6 +242,11 @@ const  PaymentPage = () => {
                         </Button>
                     </div>
                 </form>
+                <div className="w-full">
+                  <Button variant="outline" className="w-full" onClick={() => router.push("/dashboard")}>
+                          Cancel and Go Back
+                  </Button>
+                </div>
         </div>
       </div>
     </>

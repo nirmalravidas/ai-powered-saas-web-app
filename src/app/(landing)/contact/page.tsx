@@ -71,7 +71,7 @@ export default function Contact() {
                             </label>
                             <textarea name="message" required placeholder="Your message here..." className="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus-visible:border-foreground shadow-sm rounded-lg"></textarea>
                         </div>
-                        <button type="submit" name="redirect" value="https://rexhorizon.com" className="w-full px-4 py-2 text-black font-medium bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg duration-150">
+                        <button type="submit" name="redirect" value="https://rexhorizon.com/contact-thankyou" className="w-full px-4 py-2 text-black font-medium bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg duration-150">
                             Submit
                         </button>
                         

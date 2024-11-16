@@ -42,7 +42,7 @@ export const FAQ = [
     {
         id: "item-9",
         question: "How to delete my account?",
-        answer: "If you want to delete your account, please contact us at out contact page. You have provided your email address, name, and which plan you have. We will delete your account and all your data.",
+        answer: "If you want to delete your account, please contact us through our contact page and provide your email address, name, and the plan you are subscribed to. Once we receive your request with the necessary details, we will delete your account along with all associated data. Please note that this action is permanent and cannot be reversed.",
     },
     
 ];
