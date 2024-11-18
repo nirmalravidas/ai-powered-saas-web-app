@@ -17,19 +17,19 @@ import Link from 'next/link';
 
 const tools = [
   {
-    label: 'Free Trial: Only 4 images',
+    label: 'Free Plan: Only 4 images',
     icon: SquareDot,
     color: 'text-violet-500',
     bgColor: 'bg-violet-500/10',
   },
   {
-    label: 'Basic Plan: Up to 60 images / month.',
+    label: 'Pro plan: Up to 50 images.',
     icon: SquareDot,
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-500/10',
   },
   {
-    label: 'Pro Plan: Up to 200 images / month.',
+    label: 'Premier Plan: Up to 150 images',
     icon: SquareDot,
     color: 'text-pink-700',
     bgColor: 'bg-pink-700/10',

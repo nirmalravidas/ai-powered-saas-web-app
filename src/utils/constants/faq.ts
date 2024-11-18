@@ -17,7 +17,7 @@ export const FAQ = [
     {
         id: "item-4",
         question: "What are the available subscription plans?",
-        answer: "We offer credits based plans: Free Plan - Generate up to 4 images at no cost. Pro Plan - Generate up to 60 images for $49. Premier Plan - Generate up to 200 images for $299.",
+        answer: "We offer credits based plans: Free Plan - Generate up to 4 images at no cost. Pro Plan - Generate up to 50 images for $49. Premier Plan - Generate up to 150 images for $299.",
     },
     {
         id: "item-5",

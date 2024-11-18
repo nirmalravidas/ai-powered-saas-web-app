@@ -23,7 +23,6 @@ import { Button } from '@/components/ui/button';
 import { Empty } from '@/components/Dashboard/empty';
 import { LoaderPage } from '@/components/Dashboard/loader';
 import { Card, CardFooter } from '@/components/ui/card';
-
 import { amountOptions, formSchema, resolutionOptions } from './constants';
 import { useProModal } from '@/app/hooks/use-pro-modal';
 
