@@ -56,35 +56,19 @@ export const PLANS = [
     }
 ];
 
-// export const PRICING_FEATURES = [
-//     {
-//         text: "Shorten links",
-//         tooltip: "Create shortened links",
-//     },
-//     {
-//         text: "Track clicks",
-//         tooltip: "Track clicks on your links",
-//     },
-//     {
-//         text: "See top countries",
-//         tooltip: "See top countries where your links are clicked",
-//     },
-//     {
-//         text: "Upto 10 tags",
-//         tooltip: "Add upto 10 tags to your links",
-//     },
-//     {
-//         text: "Community support",
-//         tooltip: "Community support is available for free users",
-//     },
-//     {
-//         text: "Priority support",
-//         tooltip: "Get priority support from our team",
-//     },
-//     {
-//         text: "AI powered suggestions",
-//         tooltip: "Get AI powered suggestions for your links",
-//     },
-// ];
+export const PRICING_FEATURES = [
+    {
+        text: "Only 4 images.",
+        tooltip: "NUmber of images.",
+    },
+    {
+        text: "Only 50 images",
+        tooltip: "Number of images",
+    },
+    {
+        text: "only 150 images",
+        tooltip: "Number of images",
+    },
+];
 
 export const WORKSPACE_LIMIT = 2;
