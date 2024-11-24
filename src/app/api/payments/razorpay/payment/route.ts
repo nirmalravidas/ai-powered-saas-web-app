@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     // Create a new Razorpay order
     const order = await razorpayInstance.orders.create({
       amount: amount * 100, // Convert to smallest currency unit
-      currency: "INR",
+      currency: "USD",
       receipt: `receipt_order_${Math.random().toString(36).substring(7)}`, // Generate a unique receipt ID
     });
 

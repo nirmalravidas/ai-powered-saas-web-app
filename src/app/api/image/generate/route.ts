@@ -51,6 +51,7 @@ export async function POST(req: Request) {
 
     // Prepare OpenAI request payload
     const requestData = {
+      
       prompt,
       n,
       size,
