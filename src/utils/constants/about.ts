@@ -1,9 +1,8 @@
-
 import { APP_NAME } from "./site";
 
 export const ABOUT = [
   {
     title: `About ${APP_NAME}`,
-    description: `${APP_NAME} is an advanced AI-powered platform designed to empower professionals and creatives with effortless image generation. Using state-of-the-art technology, it transforms simple text prompts into stunning, high-quality visuals. Whether you're in marketing, e-commerce, or digital content creation, ${APP_NAME} provides a fast, reliable, and versatile solution for crafting unique and impactful images tailored to your needs. With support for a wide range of use cases and an emphasis on flexibility, the platform equips users with the tools to bring their ideas to life. Prioritizing efficiency and user-friendliness, ${APP_NAME} ensures exceptional, customizable results every time—helping you elevate your projects with ease.`
+    description: `${APP_NAME} is an advanced AI-powered platform designed to help educators, content creators, and professionals generate complete, high-quality courses effortlessly. Using cutting-edge AI technology, it transforms simple topics or prompts into structured course content, including modules, lessons, and examples. Whether you're creating online classes, training materials, or educational resources, ${APP_NAME} provides a fast, reliable, and versatile solution for crafting engaging and impactful learning experiences tailored to your audience. With support for various subjects and an emphasis on customization, the platform equips users with the tools to bring their educational ideas to life. Prioritizing efficiency and user-friendliness, ${APP_NAME} ensures professional, ready-to-use courses every time—helping you accelerate course creation with ease.`
   },
 ] as const;

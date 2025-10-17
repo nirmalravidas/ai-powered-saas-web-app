@@ -1,17 +1,16 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Montserrat } from 'next/font/google';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import {
   LayoutDashboard,
-  ImageIcon,
   Settings,
+  BookOpen,
 } from 'lucide-react';
 
 import { APP_NAME, cn } from '@/utils';
-import FreeCounter from '@/components/Dashboard/free-counter';
 
 const montserrat = Montserrat({ weight: '600', subsets: ['latin'] });
 
@@ -22,38 +21,28 @@ const routes = [
     href: '/dashboard',
     color: 'text-sky-500',
   },
-  
   {
-    label: 'Image  Generation',
-    icon: ImageIcon,
-    href: '/image',
-    color: 'text-violet-600',
+    label: 'Courses',
+    icon: BookOpen,
+    href: '/courses',
+    color: 'text-emerald-500',
   },
-
   {
     label: 'Settings',
     icon: Settings,
     href: '/settings',
   },
-
 ];
 
-interface SidebarProps {
-  apiLimitCount: number;
-  plan: string;
-  isActive: boolean;
-  onLinkClick?: () => void;
-}
-
-const Sidebar = ({ apiLimitCount = 0, onLinkClick, plan, isActive }: SidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname();
 
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
       <div className="px-3 py-2 flex-1">
         <Link href="/" className="flex items-center pl-3 mb-14">
-          <div className="relative w-24 h-24 mr-4">
-            <Image fill alt="Logo" src="/icons/logo.png"/>  
+          <div className='px-2'>
+            <Image src="/icons/logo.png" alt="logo" width={24} height={24} />
           </div>
           <h1 className={cn('text-2xl font-bold', montserrat.className)}>
             {APP_NAME}
@@ -64,7 +53,6 @@ const Sidebar = ({ apiLimitCount = 0, onLinkClick, plan, isActive }: SidebarProp
             <Link
               href={route.href}
               key={route.href}
-              onClick={onLinkClick}
               className={cn(
                 'text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition',
                 pathname === route.href
@@ -80,7 +68,6 @@ const Sidebar = ({ apiLimitCount = 0, onLinkClick, plan, isActive }: SidebarProp
           ))}
         </div>
       </div>
-      <FreeCounter apiLimitCount={apiLimitCount} plan={plan} isActive={isActive} />
     </div>
   );
 };

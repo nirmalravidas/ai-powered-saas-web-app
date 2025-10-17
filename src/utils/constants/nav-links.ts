@@ -6,34 +6,30 @@ export const NAV_LINKS = [
         href: "/features",
         menu: [
             {
-                title: "Generate Images With AI",
-                tagline: "Create custom visuals instantly – no artistic skills required!",
+                title: "Generate Courses With AI",
+                tagline: "Create complete, structured courses instantly – no manual planning required!",
                 href: "/features",
                 icon: Bot,
             },
             {
-                title: "Instant Generation",
-                tagline: "Create custom visuals instantly – no artistic skills required!",
+                title: "Instant Course Creation",
+                tagline: "AI generates modules, lessons, and examples instantly, saving you weeks of work.",
                 href: "/features",
                 icon: Zap,
             },
             {
-                title: "High Resolution",
-                tagline: "Generate high-resolution images that are ready to use in any project.",
+                title: "High-Quality Content",
+                tagline: "Get professional, ready-to-teach course content for any subject or audience.",
                 href: "/features",
                 icon: FileImage,
             },
             {
-                title: "Effortless Downloads",
-                tagline: "Download Your Creations in a Click!",
+                title: "Effortless Export",
+                tagline: "Easily export your courses in multiple formats for immediate use.",
                 href: "/features",
                 icon: Download,
             },
         ],
-    },
-    {
-        title: "Plans & Pricing",
-        href: "/pricing",
     },
     {
         title: "How it Works",
@@ -45,7 +41,7 @@ export const NAV_LINKS = [
         menu: [
             {
                 title: "FAQ",
-                tagline: "Get answers to your questions.",
+                tagline: "Find answers about generating AI-powered courses quickly.",
                 href: "/resources/faq",
                 icon: MessageCircle,
             },

@@ -1,5 +1,4 @@
 
-
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -24,22 +23,22 @@ const Hero = async() => {
                             <span className="backdrop absolute inset-[1px] rounded-full bg-neutral-950 transition-colors duration-200 group-hover:bg-neutral-900" />
                             <span className="h-full w-full blur-md absolute bottom-0 inset-x-0 bg-gradient-to-tr from-primary/20"></span>
                             <span className="z-10 py-0.5 text-sm text-neutral-100 flex items-center justify-center gap-1">
-                                ✨ Generate Images With AI
+                                ✨ Generate Courses With AI
                                 <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
                             </span>
                         </button>
                         <h1 className="text-foreground text-center py-6 text-4xl font-medium tracking-normal text-balance sm:text-5xl md:text-6xl lg:text-7xl !leading-[1.15] w-full font-heading">
-                            From Concept To Masterpiece
+                            Create Complete Courses in Minutes
                         </h1>
                         <p className="mb-12 text-lg tracking-tight text-muted-foreground md:text-xl text-balance">
-                            Explore endless possibilities and bring your vision to life with {APP_NAME}.
+                            Shape the future of learning with AI-powered course creation by {APP_NAME}.
                             <br className="hidden md:block" />
                             <span className="hidden md:block">Generate high-quality images for any purpose with just a few clicks!</span>
                         </p>
                         <div className="flex items-center justify-center whitespace-nowrap gap-4 z-50">
                             <Button asChild>
                                 <Link href={user ? "/dashboard" : "/sign-in"} className="flex items-center">
-                                    Start creating Images
+                                    Start creating Courses
                                     <ArrowRightIcon className="w-4 h-4 ml-2" />
                                 </Link>
                             </Button>

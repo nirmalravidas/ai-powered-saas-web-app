@@ -8,18 +8,7 @@ import { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Button } from '../ui/button';
 
-
-interface MobileSidebarProps {
-  apiLimitCount: number;
-  plan: string;
-  isActive: boolean;
-}
-
-const MobileSidebar = ({
-  apiLimitCount = 0,
-  plan = "free",
-  isActive = false,
-}: MobileSidebarProps) => {
+const MobileSidebar = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,7 +34,7 @@ const MobileSidebar = ({
       </SheetTrigger>
       
       <SheetContent side="left" className="p-0">
-        <Sidebar plan={plan} isActive={isActive} apiLimitCount={apiLimitCount} onLinkClick={() => setIsOpen(false)}/>
+        <Sidebar/>
       </SheetContent>
     </Sheet>
   );

@@ -4,8 +4,6 @@ import React from 'react'
 
 const TermsAndConditions = () => {
 
-
-
   return (
     <>
         <MaxWidthWrapper className='mb-10'>

@@ -1,27 +1,64 @@
-# Image Generator SaaS
+# AI Course Generator SaaS
 
-Welcome to **Image Generator SaaS** – an AI-powered platform that allows users to generate stunning, high-quality images based on customizable prompts. Built to serve designers, marketers, content creators, and more, this platform brings your creative ideas to life with the help of advanced artificial intelligence.
-
--**Developed by** [Nirmal Ravidas](https://github.com/nirmalravidas)
-
-## Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Contact](#contact)
+Generate structured courses using IBM watsonx.ai and store them in IBM Cloudant. Built with Next.js, TypeScript, Tailwind, shadcn/ui, and Clerk.
 
 ## Features
-- **AI-Powered Image Generation**: Create visually striking images from simple prompts.
-- **Customizable Styles**: Tailor images to fit branding requirements with a range of customizable style options.
-- **Fast and Scalable**: Experience quick generation times with infrastructure designed for scalability.
-- **Secure and Private**: Data protection is a priority, ensuring your content and activity remain private.
-- **Versatile Applications**: Generate images for social media, marketing, website content, and more.
+- AI-generated course outlines with modules and lessons
+- Clerk authentication
+- Persistence in IBM Cloudant
+- Modern UI with shadcn/ui and Tailwind
 
 ## Tech Stack
-- **Frontend**: Next.js, TypeScript, Tailwind CSS
-- **Backend**: Node.js, Postgresql
-- **Authentication**: Clerk
-- **Payment**: Razorpay for handling subscriptions
-- **API**: OpenAI for image generation
+- Frontend: Next.js 15, TypeScript, Tailwind, shadcn/ui
+- Auth: Clerk
+- AI: IBM watsonx.ai via `@ibm-cloud/watsonx-ai`
+- DB: IBM Cloudant via `@ibm-cloud/cloudant`
 
-## Contact
--**LinkedIn**: [Nirmal Ravidas](https://www.linkedin.com/in/nirmalravidas/)
+## Copy github repo
+```bash
+git clone https://github.com/IBM/ai-powered-saas-web-app.git
+```
+
+## Setup
+1. Install dependencies
+```bash
+yarn install
+```
+
+2. Create `.env.local` with the following variables
+```bash
+# app
+NEXT_PUBLIC_APP_DOMAIN=
+NEXT_PUBLIC_APP_NAME=SmartSyllabus
+
+#Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+
+#WatsonX
+WATSONX_AI_AUTH_TYPE=
+WATSONX_AI_APIKEY=
+WATSONX_AI_PROJECT_ID=
+WATSONX_AI_URL=
+
+# Cloudant
+CLOUDANT_URL=
+CLOUDANT_API_KEY=
+```
+
+3. Ensure Cloudant databases exist
+Create databases named `users` in your Cloudant instance.
+
+4. Run the app
+```bash
+yarn dev
+```
+
+## Notes
+- The API route `src/app/api/generate-course/route.ts` calls watsonx.ai
+- Update the `modelId` in the route if you prefer a different model.

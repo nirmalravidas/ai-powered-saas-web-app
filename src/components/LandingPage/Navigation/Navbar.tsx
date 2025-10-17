@@ -13,24 +13,16 @@ import AnimationContainer from "../global/animation-container";
 import Image from "next/image";
 
 const Navbar = () => {
-
-    const { user } = useClerk();
-
+    const { user, signOut } = useClerk(); // Added signOut
     const [scroll, setScroll] = useState(false);
 
     const handleScroll = () => {
-        if (window.scrollY > 8) {
-            setScroll(true);
-        } else {
-            setScroll(false);
-        }
+        setScroll(window.scrollY > 8);
     };
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
@@ -38,14 +30,12 @@ const Navbar = () => {
             "sticky top-0 inset-x-0 h-14 w-full border-b border-transparent z-[99999] select-none",
             scroll && "border-background/80 bg-background/40 backdrop-blur-md"
         )}>
-           <AnimationContainer reverse delay={0.1} className="size-full">
+            <AnimationContainer reverse delay={0.1} className="size-full">
                 <MaxWidthWrapper className="flex items-center justify-between">
                     <div className="flex items-center space-x-12">
                         <Link href="/" className="flex items-center gap-x-1">
                             <Image src='/icons/logo.png' alt="logo" width={18} height={18} />
-                            <h1 className="text-lg font-medium">
-                                {APP_NAME}
-                            </h1>
+                            <h1 className="text-lg font-medium">{APP_NAME}</h1>
                         </Link>
 
                         <NavigationMenu className="hidden lg:flex">
@@ -68,9 +58,7 @@ const Navbar = () => {
                                                                         href="/features"
                                                                         className="flex h-full w-full select-none flex-col justify-end rounded-lg bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md"
                                                                     >
-                                                                        <h6 className="mb-2 mt-4 text-lg font-medium">
-                                                                            All Features
-                                                                        </h6>
+                                                                        <h6 className="mb-2 mt-4 text-lg font-medium">All Features</h6>
                                                                         <p className="text-sm leading-tight text-muted-foreground">
                                                                             Generate Image with AI, Downloadable, and more.
                                                                         </p>
@@ -102,31 +90,35 @@ const Navbar = () => {
                                 ))}
                             </NavigationMenuList>
                         </NavigationMenu>
-
                     </div>
 
-                    <div className="hidden lg:flex items-center">
+                    <div className="hidden lg:flex items-center gap-x-4">
                         {user ? (
-                            <div className="flex items-center">
-                                <Link href="/dashboard" className={buttonVariants({ size: "sm", })}>
+                            <>
+                                <Link href="/dashboard" className={buttonVariants({ size: "sm" })}>
                                     Dashboard
                                 </Link>
-                            </div>
+                                <button
+                                    onClick={() => signOut()}
+                                    className={buttonVariants({ size: "sm", variant: "ghost" })}
+                                >
+                                    Sign Out
+                                </button>
+                            </>
                         ) : (
-                            <div className="flex items-center gap-x-4">
+                            <>
                                 <Link href='/sign-in' className={buttonVariants({ size: "sm", variant: "ghost" })}>
                                     Sign In
                                 </Link>
-                                <Link href='/sign-up' className={buttonVariants({ size: "sm", })}>
+                                <Link href='/sign-up' className={buttonVariants({ size: "sm" })}>
                                     Get Started
                                     <ZapIcon className="size-3.5 ml-1.5 text-orange-500 fill-orange-500" />
                                 </Link>
-                            </div>
+                            </>
                         )}
                     </div>
 
                     <MobileNavbar />
-
                 </MaxWidthWrapper>
             </AnimationContainer>
         </header>
@@ -151,9 +143,7 @@ const ListItem = React.forwardRef<
                 >
                     <div className="flex items-center space-x-2 text-neutral-300">
                         <Icon className="h-4 w-4" />
-                        <h6 className="text-sm font-medium !leading-none">
-                            {title}
-                        </h6>
+                        <h6 className="text-sm font-medium !leading-none">{title}</h6>
                     </div>
                     <p title={children! as string} className="line-clamp-1 text-sm leading-snug text-muted-foreground">
                         {children}
@@ -165,4 +155,4 @@ const ListItem = React.forwardRef<
 })
 ListItem.displayName = "ListItem"
 
-export default Navbar
+export default Navbar;

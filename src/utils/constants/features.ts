@@ -1,28 +1,28 @@
 import { FileImage, Bot, Zap, Download } from "lucide-react";
 
 export const FEATURES = [
-            {
-                title: "Generate Images With AI",
-                tagline: "Create custom visuals instantly – no artistic skills required!",
-                href: "/features",
-                icon: Bot,
-            },
-            {
-                title: "Instant Generation",
-                tagline: "Create custom visuals instantly – no artistic skills required!",
-                href: "/features",
-                icon: Zap,
-            },
-            {
-                title: "High Resolution",
-                tagline: "Create high-resolution images instantly, ready for any project.",
-                href: "/features/analytics",
-                icon: FileImage,
-            },
-            {
-                title: "Effortless Downloads",
-                tagline: "Effortlessly download your creations with a single click!",
-                href: "/features",
-                icon: Download,
-            },
-        ] as const;
+    {
+        title: "Generate Courses With AI",
+        tagline: "Create complete, structured courses in minutes – no manual planning required!",
+        href: "/features",
+        icon: Bot,
+    },
+    {
+        title: "Instant Course Creation",
+        tagline: "AI generates modules, lessons, and examples instantly, saving you weeks of work.",
+        href: "/features",
+        icon: Zap,
+    },
+    {
+        title: "High-Quality Content",
+        tagline: "Get professional, easy-to-understand courses ready for your students or audience.",
+        href: "/features/analytics",
+        icon: FileImage,
+    },
+    {
+        title: "Effortless Export",
+        tagline: "Easily export your course content in multiple formats for immediate use.",
+        href: "/features",
+        icon: Download,
+    },
+] as const;

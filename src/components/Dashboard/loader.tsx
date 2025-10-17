@@ -8,7 +8,7 @@ export const LoaderPage = () => {
         <Dot />
       </div>
       <p className="text-muted-foreground text-sm text-center">
-        Image is loading...
+        Loading...
       </p>
     </div>
   );

@@ -12,13 +12,7 @@ export default clerkMiddleware(async (auth, req) => {
         return NextResponse.redirect(new URL("/sign-in", req.url));
     }
 
-    //Protect /paymentsuccess and sub-routes
-    if (!userId && url.startsWith("/paymentsuccess")) {
-        return NextResponse.redirect(new URL("/sign-in", req.url));
-    }
-
-    //Protect /payment and sub-routes
-    if (!userId && url.startsWith("/payment")) {
+    if (!userId && url.startsWith("/courses")) {
         return NextResponse.redirect(new URL("/sign-in", req.url));
     }
 

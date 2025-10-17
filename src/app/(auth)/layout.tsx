@@ -5,7 +5,6 @@ import { APP_NAME } from "@/utils";
 import { Metadata } from "next";
 import React from 'react';
 
-
 export const metadata: Metadata = {
     title: `Sign up - ${APP_NAME}`,
     description: 'AI-powered image generator for creating stunning visuals from simple prompts.',

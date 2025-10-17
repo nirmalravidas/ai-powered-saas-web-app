@@ -1,7 +1,7 @@
 import React from 'react'
 import { AnimationContainer, MaxWidthWrapper } from '..'
 import MagicBadge from '@/components/ui/magic-badge'
-import { PROCESS } from '@/utils'
+import { APP_NAME, PROCESS } from '@/utils'
 import MagicCard from '@/components/ui/magic-card'
 
 const HowItWorksSection = () => {
@@ -13,10 +13,10 @@ const HowItWorksSection = () => {
                     <div className="flex flex-col items-center lg:items-center justify-center w-full py-8 max-w-xl mx-auto">
                         <MagicBadge title="How it Works" />
                         <h2 className="text-center lg:text-center text-3xl md:text-5xl !leading-[1.1] font-medium font-heading text-foreground mt-6">
-                        Welcome to Our AI-Powered Image Generation Service
+                        Welcome to Our AI-Powered Course Generation Service
                         </h2>
                         <p className="mt-4 text-center lg:text-center text-lg text-muted-foreground max-w-lg">
-                        Creating stunning, custom images has never been easier! Our advanced AI technology allows you to generate unique visuals tailored to your needs in just a few simple steps. Here’s how it works:
+                         {APP_NAME} makes course creation fast, easy, and intelligent. Here’s how you can get started:
                         </p>
                     </div>
                 </AnimationContainer>

@@ -3,11 +3,8 @@ import Link from 'next/link';
 
 const Footer = () => {
   const links = [
+    { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/privacy-policy', label: 'Privacy Policy' },
-    { href: '/terms', label: 'Terms of Service' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/cancellation-and-refund-policy', label: 'Cancellation & Refund Policy' },
   ];
 
   return (

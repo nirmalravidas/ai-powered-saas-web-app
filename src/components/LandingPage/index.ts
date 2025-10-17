@@ -11,7 +11,6 @@ import Hero from "./Hero/page";
 import HowItWorksSection from "./HowItWorks/page";
 import Footer from "./Navigation/Footer";
 import Navbar from "./Navigation/Navbar";
-import PricingCards from "./pricing-cards";
 import Providers from "./providers/providers";
 
 export {
@@ -28,6 +27,5 @@ export {
     Container,
     Wrapper,
     SectionTitle,
-    PricingCards,
     CTA,
 };

@@ -3,7 +3,6 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Providers } from '@/components/LandingPage';
-import { ModalProvider } from '@/components/Dashboard/MobileProvider';
 import { cn, generateMetadata } from '@/utils';
 import { ToasterProvider } from '@/components/Dashboard/toaster-provider';
 
@@ -31,7 +30,6 @@ export default function RootLayout({ children,}: { children: React.ReactNode;}) 
         <body className={cn(
                     "min-h-screen bg-background text-foreground antialiased !font-default overflow-x-hidden", inter.className,)}>
           <Providers>
-            <ModalProvider />
             <ToasterProvider />
             {children}
           </Providers>
